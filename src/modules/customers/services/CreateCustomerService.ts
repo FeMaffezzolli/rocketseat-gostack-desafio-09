@@ -21,7 +21,7 @@ class CreateCustomerService {
     const isExists = await this.customersRepository.findByEmail(email);
 
     if (isExists) {
-      throw new AppError('Email already registered.', 403);
+      throw new AppError('Email already registered.', 400);
     }
 
     const customer = await this.customersRepository.create({
