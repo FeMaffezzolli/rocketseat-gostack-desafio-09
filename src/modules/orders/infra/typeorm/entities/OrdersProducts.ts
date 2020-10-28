@@ -30,7 +30,7 @@ class OrdersProducts {
   @Column({ type: 'uuid' })
   order_id: string;
 
-  @Column({ type: 'decimal', scale: 6, precision: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   price: number;
 
   @Column({ type: 'int' })
