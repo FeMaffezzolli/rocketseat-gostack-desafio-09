@@ -1,11 +1,13 @@
 import {
   Entity,
   PrimaryGeneratedColumn,
+  Column,
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  JoinColumn,
+  JoinTable,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 
 import Customer from '@modules/customers/infra/typeorm/entities/Customer';
@@ -17,10 +19,13 @@ class Order {
   id: string;
 
   @ManyToOne(() => Customer)
+  @JoinColumn({ name: 'customer_id' })
   customer: Customer;
 
-  @OneToMany(() => OrdersProducts, orderProducts => orderProducts.order)
-  @JoinColumn()
+  @OneToMany(() => OrdersProducts, orderProducts => orderProducts.order, {
+    cascade: true,
+  })
+  @JoinTable()
   order_products: OrdersProducts[];
 
   @CreateDateColumn()
